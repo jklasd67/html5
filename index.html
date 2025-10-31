@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odysee layout</title>
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            color: white;
+            background-color: black;
+            line-height: 1.6;
+        }
+        
+        a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        /* Skip link asi*/
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: white;
+            color: black;
+            padding: 8px;
+            z-index: 100;
+            transition: top 0.3s;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+        
+        /* headder stiilid */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            border-bottom: 1px solid white;
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .menu-button {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid white;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .menu-button:hover {
+            background-color: #333;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        
+        .search-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .search-bar {
+            width: 400px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid white;
+        }
+        
+        .icon-button {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid white;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .icon-button:hover {
+            background-color: #333;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .auth-button {
+            padding: 10px 20px;
+            border: 1px solid white;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .auth-button:hover {
+            background-color: #333;
+        }
+        
+        /* main laayout */
+        .main-container {
+            display: flex;
+            min-height: calc(100vh - 100px);
+        }
+        
+        /* Sidebar stiilid */
+        aside {
+            width: 250px;
+            border-right: 1px solid white;
+            overflow-y: auto;
+            height: calc(100vh - 100px);
+            position: sticky;
+            top: 0;
+        }
+        
+        .sidebar-categories {
+            list-style: none;
+            padding: 20px 0;
+        }
+        
+        .category {
+            padding: 12px 20px;
+            border-bottom: 1px solid #333;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .category:hover {
+            background-color: #333;
+        }
+        
+        /* mainmainmain */
+        main {
+            flex: 1;
+            padding: 20px;
+        }
+        
+        .featured-content {
+            height: 300px;
+            border: 1px solid white;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .featured-content:hover {
+            background-color: #333;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .video-card {
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .video-thumbnail {
+            height: 150px;
+            border: 1px solid white;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .video-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .channel-name {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        
+        /* jalatise stiil */
+        footer {
+            padding: 20px;
+            border-top: 1px solid white;
+            text-align: center;
+        }
+        
+        /* tunnetus feeling tšakrad */
+        @media (max-width: 1200px) {
+            .video-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .video-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .search-bar {
+                width: 200px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-bar {
+                display: none;
+            }
+            
+            .icon-button {
+                display: none;
+            }
+            
+            aside {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <a href="#main" class="skip-link">Skip to content</a>
+    
+    <header>
+        <div class="brand">
+            <div class="menu-button">menu</div>
+            <h1>odysee</h1>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-bar">search</div>
+            <div class="icon-button">cloud</div>
+            <div class="icon-button">settigns</div>
+            <div class="icon-button">help</div>
+            <div class="icon-button">light/dark</div>
+        </div>
+        
+        <div class="auth-buttons">
+            <div class="auth-button">log in</div>
+            <div class="auth-button">sign up</div>
+        </div>
+    </header>
+    
+  
+    <div class="main-container">
+        <!-- sidebarrrr -->
+        <aside>
+            <nav>
+                <ul class="sidebar-categories">
+                    <li class="category">Home</li>
+                    <li class="category">Following</li>
+                    <li class="category">Discover</li>
+                    <li class="category">Pop Culture</li>
+                    <li class="category">Artists</li>
+                    <li class="category">Education</li>
+                    <li class="category">Lifestyle</li>
+                    <li class="category">Spooky</li>
+                    <li class="category">Gaming</li>
+                    <li class="category">Tech</li>
+                    <li class="category">Comedy</li>
+                    <li class="category">Music</li>
+                    <li class="category">Sports</li>
+                    <li class="category">Universe</li>
+                    <li class="category">Finance 2.0</li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <!-- maincontent -->
+        <main id="main">
+            
+            <section class="featured-content">
+                Featured Content 
+            </section>
+            
+           
+            <section>
+                <h2>Discover</h2>
+                
+                <!-- 1st row videos -->
+                <div class="video-grid">
+                    <article class="video-card">
+                        <div class="video-thumbnail">Video 1</div>
+                        <div class="video-title">Video 1</div>
+                        <div class="channel-name">Channel 1</div>
+                    </article>
+                    
+                    <article class="video-card">
+                        <div class="video-thumbnail">Video 2</div>
+                        <div class="video-title">Video 2</div>
+                        <div class="channel-name">Channel 2</div>
+                    </article>
+                    
+                    <article class="video-card">
+                        <div class="video-thumbnail">Video 3</div>
+                        <div class="video-title">Video 3</div>
+                        <div class="channel-name">Channel 3</div>
+                    </article>
+                    
+                    <article class="video-card">
+                        <div class="video-thumbnail">Video 4</div>
+                        <div class="video-title">Video 4</div>
+                        <div class="channel-name">Channel 4</div>
+                    </article>
+                    
+                    <article class="video-card">
+                        <div class="video-thumbnail">Video 5</div>
+                        <div class="video-title">Video 5</div>
+                        <div class="channel-name">Channel 5</div>
+                    </article>
+                    
+                    <article class="video-card">
+                        <div class="video-thumbnail">Video 6</div>
+                        <div class="video-title">Video 6</div>
+                        <div class="channel-name">Channel 6</div>
+                    </article>
+                </div>
+                
+                <!-- 2ndf row videos -->
+                <div class="video-grid">
+                    <article class="video-card">
+                        <div class="video-thumbnail">Video 7</div>
+                        <div class="video-title">Video 7</div>
+                        <div class="channel-name">Channel 7</div>
+                    </article>
+                    
+                    <article class="video-card">
+                        <div class="video-thumbnail">Video 8</div>
+                        <div class="video-title">Video 8</div>
+                        <div class="channel-name">Channel 8</div>
+                    </article>
+                    
+                    <article class="video-card">
+                        <div class="video-thumbnail">Video 9</div>
+                        <div class="video-title">Video 9</div>
+                        <div class="channel-name">Channel 9</div>
+                    </article>
+                    
+                    <article class="video-card">
+                        <div class="video-thumbnail">Video 10</div>
+                        <div class="video-title">Video 10</div>
+                        <div class="channel-name">Channel 10</div>
+                    </article>
+                    
+                    <article class="video-card">
+                        <div class="video-thumbnail">Video 11</div>
+                        <div class="video-title">Video 11</div>
+                        <div class="channel-name">Channel 11</div>
+                    </article>
+                    
+                    <article class="video-card">
+                        <div class="video-thumbnail">Video 12</div>
+                        <div class="video-title">Video 12</div>
+                        <div class="channel-name">Channel 12</div>
+                    </article>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <!-- footer jalatis ohyea-->
+    <footer>
+        <p>Odysee Layoutr</p>
+    </footer>
+</body>
+</html>
